@@ -18,6 +18,7 @@ spec:
       containers:
       - name: redis
         image: redis:6.0.4-alpine
+        command: redis-server --requirepass "LiveProject_PASSWORD143!"
         ports:
         - containerPort: 6379
 ---

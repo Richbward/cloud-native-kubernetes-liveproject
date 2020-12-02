@@ -1,5 +1,5 @@
 {
-  "name": "security-news-source-payments",
+  "name": "sns-payment",
   "version": "1.0.0",
   "description": "Payments service for Security News Source application",
   "main": "server.js",

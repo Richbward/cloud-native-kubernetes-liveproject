@@ -1,4 +1,6 @@
 FROM node:14.4.0-alpine3.11
+ENV NODE_ENV=production
+ENV VAR1=securitynewssourcepayments-dev
 
 RUN mkdir -p /opt/sns/app && \
     mkdir -p /opt/sns/logs && \
@@ -12,6 +14,9 @@ COPY package*.json /opt/sns/app/
 COPY server.js /opt/sns/app/
 COPY docker-entrypoint.sh /opt/sns/app/
 
+COPY ["package.json", "package-lock.json*", "npm-shrinkwrap.json*", "./"]
+RUN npm install --production --silent && mv node_modules ../
+
 WORKDIR /opt/sns/app
 
 RUN chmod 700 docker-entrypoint.sh && \
@@ -20,3 +25,7 @@ RUN chmod 700 docker-entrypoint.sh && \
 EXPOSE 3000
 
 ENTRYPOINT ["./docker-entrypoint.sh"]
+
+CMD ["node", "server.js"]
+
+
